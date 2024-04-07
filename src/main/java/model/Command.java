@@ -1,3 +1,5 @@
+package model;
+
 public class Command {
     private String direction;
     private int magnitude;
@@ -15,11 +17,4 @@ public class Command {
         return magnitude;
     }
 
-    public void setDirection(String direction) {
-        this.direction = direction;
-    }
-
-    public void setMagnitude(int magnitude) {
-        this.magnitude = magnitude;
-    }
 }

@@ -1,3 +1,6 @@
+import model.Command;
+import model.Coordinate;
+
 import java.util.ArrayList;
 
 public class Calculator {
@@ -8,21 +11,32 @@ public class Calculator {
     private int finalHorizontalPosition;
     private int finalDepth;
     private int finalPositionProduct;
+    Coordinate currentPosition = new Coordinate();
+    private ArrayList<Coordinate> coordinatesList;
 
     public void calculateFinalPosition(ArrayList<Command> commands) {
         horizontalPosition = startingHorizontalPosition;
         depth = startingDepth;
+        coordinatesList = new ArrayList<>();
+        coordinatesList.add(new Coordinate(startingHorizontalPosition, startingDepth));
+
 
         for (Command command : commands) {
             switch (command.getDirection()) {
                 case "forward":
                     horizontalPosition += command.getMagnitude();
+                    currentPosition = new Coordinate(horizontalPosition, depth);
+                    coordinatesList.add(currentPosition);
                     break;
                 case "down":
                     depth += command.getMagnitude();
+                    currentPosition = new Coordinate(horizontalPosition, depth);
+                    coordinatesList.add(currentPosition);
                     break;
                 case "up":
                     depth -= command.getMagnitude();
+                    currentPosition = new Coordinate(horizontalPosition, depth);
+                    coordinatesList.add(currentPosition);
                     break;
                 default:
                     System.out.println("Invalid command.");
@@ -39,6 +53,7 @@ public class Calculator {
     }
 
     public void printFinalCalculatedPositions() {
+        System.out.println("\"X\" marks the spot!");
         System.out.print("The submarine's final horizontal position is ");
         System.out.printf("%,d.%n", finalHorizontalPosition);
         System.out.print("The submarine's final depth is ");
@@ -57,5 +72,9 @@ public class Calculator {
 
     public int getFinalPositionProduct() {
         return finalPositionProduct;
+    }
+
+    public ArrayList<Coordinate> getCoordinatesList() {
+        return coordinatesList;
     }
 }

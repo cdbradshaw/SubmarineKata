@@ -5,6 +5,8 @@ public class RunSilentRunDeep {
         CommandParser parser = new CommandParser();
         Calculator subCalculator = new Calculator();
         final Scanner keyboardScanner = new Scanner(System.in);
+        MyFrame graph = new MyFrame(subCalculator);
+        graph.setVisible(false);
 
         Menus.printWelcomeMenu();
 
@@ -20,9 +22,11 @@ public class RunSilentRunDeep {
 
                     subCalculator.calculateFinalPosition(parser.parseCommandFile(inputFileName));
 
+                    graph.setVisible(true);
                     Menus.printFinalPositionInfoMenu();
                     subCalculator.printFinalCalculatedPositions();
                     Menus.printClosingMenu();
+
                     break;
                 case "2"://Exit
                     System.out.println("Bye.");
